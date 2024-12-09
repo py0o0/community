@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href = "member/join" id = "signUpLink">회원가입</a>
+<a href = "member/login" id = "loginLink">로그인</a>
+<a href = "/member/logout" id = "logoutLink">로그아웃</a> <br>
+<p id = "welcome"></p>
+
+<div>
+    <button type="button" onclick="isWrite()">글 작성</button>
+    <a type="text" href="board/myPage" id = "myPage">마이페이지</a>
+</div>
+
+<div>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성시간</th>
+            <th>조회수</th>
+            <th>좋아요</th>
+        </tr>
+        <tr th:each = "board: ${board}">
+            <td th:text = "${board.boardId}"></td>
+            <td>
+                <a th:text = "${board.boardTitle}" th:href="'/board/' + ${board.boardId}"></a>
+            </td>
+            <td th:text = "${board.boardWriter}"></td>
+            <td th:text = "${board.boardCreated}"></td>
+            <td th:text = "${board.boardPass}"></td>
+            <td th:text = "${board.boardLike}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+<script src="/js/isLogin.js"></script>
+<script>
+    async function updatePage(){
+        const {login, userId} = await isLogin();
+
+        const signUpLink = document.getElementById("signUpLink");
+        const loginLink = document.getElementById("loginLink");
+        const logoutLink = document.getElementById("logoutLink")
+        const welcome = document.getElementById("welcome")
+        const myPage = document.getElementById("myPage");
+        console.log("로그인 상태:", login);
+        if(login){
+            signUpLink.style.display = "none";
+            loginLink.style.display = "none";
+            logoutLink.style.display = "inline";
+            welcome.textContent = `반갑습니다! ${userId}님!`;
+            welcome.style.display = "inline";
+            myPage.style.display = "inline";
+        }
+        else{
+            signUpLink.style.display = "inline";
+            loginLink.style.display = "inline";
+            logoutLink.style.display = "none";
+            welcome.textContent = `반갑습니다! ${userId}님!`;
+            welcome.style.display = "none";
+            myPage.style.display = "none";
+        }
+
+    }
+    async function isWrite(){
+        const{login, userId} = await isLogin();
+        if(login) window.location.href = "/board/write"
+        else {
+            alert("로그인 후 이용가능한 서비스입니다.");
+            window.location.href = "/"
+        }
+    }
+    document.addEventListener('DOMContentLoaded', updatePage);
+</script>
+</html>

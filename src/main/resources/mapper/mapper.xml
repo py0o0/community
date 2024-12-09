@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Com">
+    <select id = "checkId" parameterType = "String" resultType = "Integer">
+        select count(*) from user_table where id = #{id}
+    </select>
+    <insert id = "join" parameterType = "member">
+        insert into user_table(id,password,nickname)
+        values(#{id},#{password},#{nickname})
+    </insert>
+    <select id = "accessLogin" parameterType = "member" resultType = "Integer">
+        select count(*) from user_table where id = #{id} and password = #{password}
+    </select>
+
+    <insert id = "writeBoard" parameterType = "board">
+        insert into board_table(boardTitle, boardWriter, boardContents)
+        values(#{boardTitle},#{boardWriter},#{boardContents})
+    </insert>
+    <select id = "findAllBoard" resultType = "board">
+        select boardId, boardTitle, boardWriter, boardContents, boardPass, boardLike, Date_format(boardCreated,"%Y-%m-%d")
+        as boardCreated
+        from board_table
+        order by 1 desc
+    </select>
+    <select id = "findByIdBoard" parameterType = "Integer" resultType = "board">
+        select boardId, boardTitle, boardWriter, boardContents, boardPass, boardLike, Date_format(boardCreated,"%Y-%m-%d")
+            as boardCreated
+        from board_table
+        where boardId = #{boardId}
+    </select>
+    <update id = "updatePassBoard" parameterType = "Integer">
+        update board_table set boardPass = boardPass + 1
+        where boardId = #{boardId}
+    </update>
+    <update id = "modifyPageBoard" parameterType="board">
+        update board_table set boardTitle = #{boardTitle}, boardContents = #{boardContents}
+        where boardId = #{boardId}
+    </update>
+    <select id = "likeBoard" resultType = "Integer">
+        select count(*) from like_table where boardId = #{boardId} and userId = #{userId}
+    </select>
+    <update id = "boardLikeBoard" parameterType="Integer">
+        update board_table set boardLike = boardLike + 1 where boardId = #{boardId}
+    </update>
+    <delete id = "removeBoard" parameterType="Integer">
+        delete from board_table where boardId = #{boardId}
+    </delete>
+    <select id="findByUserId" parameterType="String" resultType="board">
+        select * from board_table where boardWriter=#{userId} order by boardId desc
+    </select>
+
+    <insert id = "likeTableUpdate">
+        insert into like_table(userId, boardId)
+        values (#{userId}, #{boardId})
+    </insert>
+    <delete id="removeLike" parameterType="Integer">
+        delete from like_table where boardId = #{boardId}
+    </delete>
+    <select id="findByUserIdLike" parameterType="String" resultType="board">
+        select * from board_table a where a.boardId in (select b.boardId from like_table b where userId=#{userId})
+        order by a.boardId desc
+    </select>
+
+    <insert id="commentWrite" parameterType="comment">
+        insert into comment_table(commentWriter,commentBoardId,commentContents)
+        values (#{commentWriter},#{commentBoardId},#{commentContents})
+    </insert>
+    <select id="findCommentById" parameterType="Integer" resultType="comment">
+        select * from comment_table where commentBoardId=#{boardId}
+    </select>
+    <select id="findByUserIdComment" parameterType="String" resultType="board">
+        select * from board_table where boardId in (select commentBoardId from comment_table where commentWriter = #{userId}
+                                            )
+        order by boardId desc
+    </select>
+    <delete id="removeComment" parameterType="Integer">
+        delete from comment_table where commentBoardId=#{boardId}
+    </delete>
+
+</mapper>

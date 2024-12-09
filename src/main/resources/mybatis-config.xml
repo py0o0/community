@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.example.commu.Domain.Member" alias="member"></typeAlias> <!-- BoardDTO 타입을 board 타입으로 정의 -->
+        <typeAlias type="com.example.commu.Domain.Board" alias="board"></typeAlias>
+        <typeAlias type="com.example.commu.Domain.Comment" alias="comment"></typeAlias>
+    </typeAliases>
+</configuration>

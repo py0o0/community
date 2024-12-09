@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action = "/board/modify/${boardId}" method = "post">
+    <input type = "hidden" name = "boardId" th:value = "${boardId}">
+    제목: <input type = "text" placeholder="제목" name = "boardTitle"><br>
+    내용: <textarea type="text" placeholder="내용" name = "boardContents"></textarea><br>
+    <input type = "submit" value = "수정하기">
+</form>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+id: <input type = "text" name = "id" id = "userId"> <br>
+pass: <input type = "text" name = "password" id = userPass> <br>
+<button type = "button" onclick = "accessLogin()">로그인</button>
+</body>
+<script>
+   async function accessLogin(){
+        const id = document.getElementById("userId").value;
+        const pass = document.getElementById("userPass").value;
+
+        try{
+            const response = await fetch(`/member/accessLogin?id=${id}&password=${pass}`,{
+                method: "GET",
+            });
+            const data = await response.json();
+
+            if(data){
+                alert("로그인 성공");
+                window.location.href = "/"
+            }
+            else alert("로그인 실패")
+
+
+        }catch(error){
+            console.log(error);
+            alert("오류 발생")
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action = "/member/join" method = "post" id = "joinForm">
+    id: <input type = "text" name = "id" id = "userId"> <button type = "button" onclick = "checkId()">중복체크</button> <br>
+    pass: <input type = "text" name = "password"><br>
+    닉네임: <input type = "text" name = "nickname"><br>
+    <input type = "submit" value = "회원가입">
+
+</form>
+</body>
+<script>
+    async function checkId(){
+        const id = document.getElementById("userId").value;
+
+        if(id.trim() === ""){
+            alert("ID를 입력하세요");
+            return false;
+        }
+
+        try {
+            const response = await fetch(`/member/check-id?id=${id}`, {
+                method: 'GET',
+            });
+
+            const data = await response.json();
+
+            if (data) {
+                alert("사용 가능한 ID입니다.");
+                return true;  // 사용 가능한 ID이면 true 반환
+            } else {
+                alert("이미 사용 중인 ID입니다");
+                return false;  // 이미 사용 중인 ID면 false 반환
+            }
+        } catch (error) {
+            console.error(error);
+            alert("오류가 발생하였습니다");
+            return false;  // 오류 발생 시 false 반환
+        }
+    }
+
+    document.getElementById("joinForm").onsubmit = async (event) =>{
+        event.preventDefault();
+        try{
+            const ok = await checkId(); // fetch는 비동기이에 모든것에 async await
+            if(ok){
+                event.target.submit();
+            }
+        }
+        catch(error){
+            console.log(error);
+            event.preventDefault()
+        }
+    }
+</script>
+</html>

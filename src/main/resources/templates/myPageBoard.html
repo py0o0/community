@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="write">내가 작성한 게시물</p>
+<p id="comment">내가 댓글 남긴 게시물</p>
+<p id="like">내가 좋아한 게시물</p>
+<table>
+  <tr>
+    <th>번호</th>
+    <th>제목</th>
+    <th>작성자</th>
+    <th>작성시간</th>
+    <th>조회수</th>
+    <th>좋아요</th>
+  </tr>
+  <tr th:each="board:${board}">
+    <td th:text = "${board.boardId}"></td>
+    <td>
+      <a th:href="'/board/' + ${board.boardId}" th:text="${board.boardTitle}"></a>
+    </td>
+    <td th:text = "${board.boardWriter}"></td>
+    <td th:text = "${board.boardCreated}"></td>
+    <td th:text = "${board.boardPass}"></td>
+    <td th:text = "${board.boardLike}"></td>
+  </tr>
+</table>
+</body>
+</html>
