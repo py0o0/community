@@ -3,7 +3,7 @@
 
 1. [프로젝트 목적](#프로젝트-목적)
 1. [프로젝트 소개](#프로젝트-소개)
-2. [기술 스택](#기술-스택)
+2. [사용 기술](#사용-기술)
 3. [주요 기능](#주요-기능)
 4. [API 명세](#api-명세)
 5. [Snapshot](#snapshot)
@@ -18,35 +18,43 @@ MCV 패턴, mybatis, crud 학습
 
 <br></br>
 
- ## Use Case Diagram:
-<img src="https://github.com/user-attachments/assets/81dec1a2-777d-4826-b384-343f67a4da01" alt="UCD" width="100%" height="auto"> 
-<br></br>
-
- ## Communication Diagram:
-<img src= "https://github.com/user-attachments/assets/1ee8e171-394c-4416-83a8-4dff7156bacd" alt="CD" width="100%" height="auto"> 
-<br></br>
-
  ## 테이블 스키마:
  <img src= "https://github.com/user-attachments/assets/8a7d1278-1df2-417a-a179-80efa6994cc2" alt="DB" width="100%" height="auto"> 
 <br></br>
 
-# 기술 스택
-<img src= "https://github.com/user-attachments/assets/48e33715-5828-450a-90dd-caf96ea346b4" alt="기술스택" width="100%" height="auto"> 
+# 사용 기술
+
+## 3-1 백엔드
+
+### 주요 프레임워크 / 라이브러리
+- **Java**
+- **SpringBoot**
+- **Mybatis**
+- **Thymeleaf**
+
+### Build Tool
+- **Gradle**
+- 
+### DataBase
+- **MySQL**
+
+## 3-2 프론트엔드
+
+- **HTML**
+- **JavaScript**
+
 <br></br>
 
 # 주요 기능
  <br></br>
 - **게시판**: 
   - 좋아요 기능, 조회수 기능, CRUD 기능
-
 <br></br>
 - **사용자**: 
   - 마이페이지 기능, Session을 이용한 로그인 기능, 회원가입 기능
-
 <br></br>
 - **댓글**: 
   - CRUD 기능
-
  <br></br>
 
 #  API 명세
