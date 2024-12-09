@@ -67,18 +67,18 @@ MCV 패턴, mybatis, crud 학습
 
 ## Board API
 
-| **기능**               | **Method** | **URL**                        | **파라미터**                                                                 | **응답 형식**     | **설명**                                                                 |
-|------------------------|------------|--------------------------------|------------------------------------------------------------------------------|-------------------|--------------------------------------------------------------------------|
-| **홈 페이지 요청**      | GET        | `/`                            | 없음                                                                         | HTML 페이지       | 게시글 리스트를 출력하는 홈 페이지를 반환합니다.                         |
-| **게시글 작성 페이지 요청** | GET        | `/board/write`                | 없음                                                                         | HTML 페이지       | 게시글 작성 폼 페이지를 반환합니다.                                       |
-| **게시글 작성 요청**     | POST       | `/board/write`                | Body: `{ "boardTitle": "string", "boardContents": "string" }`                | Redirect (`/`)     | 게시글을 작성 후 홈 페이지로 리다이렉션합니다.                            |
-| **게시글 상세 페이지 요청** | GET        | `/board/{boardId}`            | `boardId` (int, 필수): 게시글 ID                                              | HTML 페이지       | 게시글 상세 내용과 댓글을 표시하는 페이지를 반환합니다.                  |
-| **게시글 수정 페이지 요청** | GET        | `/board/modify/{boardId}`     | `boardId` (int, 필수): 게시글 ID                                              | HTML 페이지       | 게시글 수정 폼 페이지를 반환합니다.                                       |
-| **게시글 수정 요청**     | POST       | `/board/modify/{boardId}`     | Body: `{ "boardId": "int", "boardTitle": "string", "boardContents": "string" }` | Redirect (`/board/{boardId}`) | 수정된 게시글을 저장하고 해당 게시글 페이지로 리다이렉션합니다.       |
-| **게시글 좋아요 요청**   | GET        | `/board/like`                 | `boardId` (int, 필수): 게시글 ID<br>`userId` (String, 필수): 사용자 ID       | JSON              | 게시글 좋아요 여부를 반환하고 좋아요 수를 업데이트합니다.                 |
-| **게시글 삭제 요청**     | GET        | `/board/remove`               | `boardId` (int, 필수): 게시글 ID                                              | 없음              | 게시글을 삭제합니다.                                                      |
-| **댓글 작성 요청**       | POST       | `/board/commentWrite`         | Body: `{ "commentBoardId": "int", "commentContents": "string" }`             | Redirect (`/board/{commentBoardId}`) | 댓글을 작성하고 해당 게시글 페이지로 리다이렉션합니다.           |
-| **내 페이지 요청**       | GET        | `/board/myPage`               | 없음                                                                         | HTML 페이지       | 사용자의 내 페이지를 반환합니다.                                          |
-| **내가 쓴 게시글 조회**   | GET        | `/board/myWrite`              | 없음                                                                         | HTML 페이지       | 사용자가 작성한 게시글 리스트를 반환합니다.                             |
-| **내가 작성한 댓글 조회** | GET        | `/board/myComment`            | 없음                                                                         | HTML 페이지       | 사용자가 작성한 댓글이 달린 게시글 리스트를 반환합니다.                 |
-| **내가 좋아요한 게시글 조회** | GET        | `/board/myLike`               | 없음                                                                         | HTML 페이지       | 사용자가 좋아요를 누른 게시글 리스트를 반환합니다.                      |
+| **기능**               | **Method** | **URL**                        | **파라미터**                                                                 | **응답 형식**     |
+|------------------------|------------|--------------------------------|------------------------------------------------------------------------------|-------------------|
+| **홈 페이지 요청**      | GET        | `/`                            | 없음                                                                         | HTML 페이지       |
+| **게시글 작성 페이지 요청** | GET        | `/board/write`                | 없음                                                                         | HTML 페이지       |
+| **게시글 작성 요청**     | POST       | `/board/write`                | Body: `{ "boardTitle": "string", "boardContents": "string" }`                | Redirect (`/`)     |
+| **게시글 상세 페이지 요청** | GET        | `/board/{boardId}`            | `boardId` (int, 필수): 게시글 ID                                              | HTML 페이지       |
+| **게시글 수정 페이지 요청** | GET        | `/board/modify/{boardId}`     | `boardId` (int, 필수): 게시글 ID                                              | HTML 페이지       |
+| **게시글 수정 요청**     | POST       | `/board/modify/{boardId}`     | Body: `{ "boardId": "int", "boardTitle": "string", "boardContents": "string" }` | Redirect (`/board/{boardId}`) |
+| **게시글 좋아요 요청**   | GET        | `/board/like`                 | `boardId` (int, 필수): 게시글 ID<br>`userId` (String, 필수): 사용자 ID       | JSON              |
+| **게시글 삭제 요청**     | GET        | `/board/remove`               | `boardId` (int, 필수): 게시글 ID                                              | 없음              |
+| **댓글 작성 요청**       | POST       | `/board/commentWrite`         | Body: `{ "commentBoardId": "int", "commentContents": "string" }`             | Redirect (`/board/{commentBoardId}`) |
+| **마이 페이지 요청**       | GET        | `/board/myPage`               | 없음                                                                         | HTML 페이지       |
+| **내가 쓴 게시글 조회**   | GET        | `/board/myWrite`              | 없음                                                                         | HTML 페이지       |
+| **내가 작성한 댓글 조회** | GET        | `/board/myComment`            | 없음                                                                         | HTML 페이지       |
+| **내가 좋아요한 게시글 조회** | GET        | `/board/myLike`               | 없음                                                                         | HTML 페이지       |
