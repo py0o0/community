@@ -42,7 +42,7 @@ MCV 패턴, mybatis, crud 학습
 
 <br></br>
 # 주요 기능
- <br></br>
+
 - **회원 가입/로그인**: 
   - client에서 id, password, nickname 입력
  
