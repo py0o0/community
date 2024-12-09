@@ -18,8 +18,8 @@ MCV 패턴, mybatis, crud 학습
 
 <br></br>
 
- ## 테이블 스키마:
- <img src= "https://github.com/user-attachments/assets/8a7d1278-1df2-417a-a179-80efa6994cc2" alt="DB" width="100%" height="auto"> 
+ ## 테이블 스키마
+ <img src= "https://github.com/user-attachments/assets/f41ca2b9-8290-4518-9750-77b15b1c1596" alt="DB" width="100%" height="auto"> 
 <br></br>
 
 # 사용 기술
