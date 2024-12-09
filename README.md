@@ -35,17 +35,6 @@ MCV 패턴, mybatis, crud 학습
 <br></br>
 
 # 주요 기능
-
-- **로그인 기능**: 
-  - 사용자가 입력한 아이디와 비밀번호를 서버로 전송하여, 서버에서 데이터베이스에 저장된 사용자 정보와 일치하는지 여부를 검사합니다.
-  - **동적 흐름**:
- 
-    
-    1. 사용자가 입력한 ID와 비밀번호를 GET 요청을 통해 서버로 전송함니다.
- 
-    
-    2. 서버는 데이터베이스에서 해당 아이디와 비밀 번호를 조회한뒤 결과를 반환합니다.
-  
  <br></br>
 - **게시판**: 
   - 좋아요 기능, 조회수 기능, CRUD 기능
@@ -53,18 +42,43 @@ MCV 패턴, mybatis, crud 학습
 <br></br>
 - **사용자**: 
   - 마이페이지 기능, Session을 이용한 로그인 기능, 회원가입 기능
+
 <br></br>
 - **댓글**: 
   - CRUD 기능
+
  <br></br>
 
 #  API 명세
-| **Method** | **Path**                       | **Query Parameters**              | **Return Type**               | **Description**                              |
-|------------|--------------------------------|-----------------------------------|-------------------------------|----------------------------------------------|
-| GET        | `/api/users/preferences`       | `id` (String)                     | `List<User>`                  | 사용자 ID로 사용자 선호 정보를 반환합니다. |
-| GET        | `/api/users/existsId`          | `id` (String)                     | `Boolean`                     | 사용자 ID의 존재 여부를 반환합니다.        |
-| GET        | `/api/users/Login`             | `id` (String), `password` (String) | `Boolean`                     | 사용자 ID와 비밀번호로 로그인 성공 여부를 반환합니다. |
-| POST       | `/api/users/create`            | -                                 | `User`                        | 새 사용자를 생성합니다.                    |
-| GET        | `/api/foodsRandomByCategory`   | `cate1` (String), `cate2` (String) | `Food`                        | 음식 카테고리로 랜덤 음식을 반환합니다.    |
+
+## Member API
+
+| **기능**              | **Method** | **URL**                | **파라미터**                                                                                                                                   | **응답 형식**                | **설명**                                                                 |
+|-----------------------|------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|--------------------------------------------------------------------------|
+| **회원가입 페이지 요청** | GET        | `/member/join`         | 없음                                                                                                                                          | HTML 페이지                  | 회원가입 폼 페이지를 반환합니다.                                         |
+| **아이디 중복 확인**    | GET        | `/member/check-id`     | `id` (String, 필수): 중복 확인할 사용자 아이디.                                                                                               | JSON                         | 중복 여부를 Boolean 값으로 반환. `true`: 사용 가능, `false`: 중복.        |
+| **회원가입 요청**       | POST       | `/member/join`         | Body: `{ "id": "string", "password": "string", "nickname": "string" }`                                                                       | Redirect (`/`)               | 회원가입 성공 시 메인 페이지로 리다이렉션.                               |
+| **로그인 페이지 요청**  | GET        | `/member/login`        | 없음                                                                                                                                          | HTML 페이지                  | 로그인 폼 페이지를 반환합니다.                                           |
+| **로그인 요청**         | GET        | `/member/accessLogin`  | `id` (String, 필수): 사용자 아이디. <br>`password` (String, 필수): 사용자 비밀번호.                                                          | JSON                         | 로그인 성공 여부를 Boolean 값으로 반환. `true`: 성공, `false`: 실패.      |
+| **로그인 상태 확인**    | GET        | `/member/isLogin`      | 없음                                                                                                                                          | JSON                         | 현재 로그인 상태와 사용자 ID를 반환.                                      |
+| **로그아웃 요청**       | GET        | `/member/logout`       | 없음                                                                                                                                          | Redirect (`/`)               | 로그아웃 후 메인 페이지로 리다이렉션.                                    |
 
 <br></br>
+
+## Board API
+
+| **기능**               | **Method** | **URL**                        | **파라미터**                                                                 | **응답 형식**     | **설명**                                                                 |
+|------------------------|------------|--------------------------------|------------------------------------------------------------------------------|-------------------|--------------------------------------------------------------------------|
+| **홈 페이지 요청**      | GET        | `/`                            | 없음                                                                         | HTML 페이지       | 게시글 리스트를 출력하는 홈 페이지를 반환합니다.                         |
+| **게시글 작성 페이지 요청** | GET        | `/board/write`                | 없음                                                                         | HTML 페이지       | 게시글 작성 폼 페이지를 반환합니다.                                       |
+| **게시글 작성 요청**     | POST       | `/board/write`                | Body: `{ "boardTitle": "string", "boardContents": "string" }`                | Redirect (`/`)     | 게시글을 작성 후 홈 페이지로 리다이렉션합니다.                            |
+| **게시글 상세 페이지 요청** | GET        | `/board/{boardId}`            | `boardId` (int, 필수): 게시글 ID                                              | HTML 페이지       | 게시글 상세 내용과 댓글을 표시하는 페이지를 반환합니다.                  |
+| **게시글 수정 페이지 요청** | GET        | `/board/modify/{boardId}`     | `boardId` (int, 필수): 게시글 ID                                              | HTML 페이지       | 게시글 수정 폼 페이지를 반환합니다.                                       |
+| **게시글 수정 요청**     | POST       | `/board/modify/{boardId}`     | Body: `{ "boardId": "int", "boardTitle": "string", "boardContents": "string" }` | Redirect (`/board/{boardId}`) | 수정된 게시글을 저장하고 해당 게시글 페이지로 리다이렉션합니다.       |
+| **게시글 좋아요 요청**   | GET        | `/board/like`                 | `boardId` (int, 필수): 게시글 ID<br>`userId` (String, 필수): 사용자 ID       | JSON              | 게시글 좋아요 여부를 반환하고 좋아요 수를 업데이트합니다.                 |
+| **게시글 삭제 요청**     | GET        | `/board/remove`               | `boardId` (int, 필수): 게시글 ID                                              | 없음              | 게시글을 삭제합니다.                                                      |
+| **댓글 작성 요청**       | POST       | `/board/commentWrite`         | Body: `{ "commentBoardId": "int", "commentContents": "string" }`             | Redirect (`/board/{commentBoardId}`) | 댓글을 작성하고 해당 게시글 페이지로 리다이렉션합니다.           |
+| **내 페이지 요청**       | GET        | `/board/myPage`               | 없음                                                                         | HTML 페이지       | 사용자의 내 페이지를 반환합니다.                                          |
+| **내가 쓴 게시글 조회**   | GET        | `/board/myWrite`              | 없음                                                                         | HTML 페이지       | 사용자가 작성한 게시글 리스트를 반환합니다.                             |
+| **내가 작성한 댓글 조회** | GET        | `/board/myComment`            | 없음                                                                         | HTML 페이지       | 사용자가 작성한 댓글이 달린 게시글 리스트를 반환합니다.                 |
+| **내가 좋아요한 게시글 조회** | GET        | `/board/myLike`               | 없음                                                                         | HTML 페이지       | 사용자가 좋아요를 누른 게시글 리스트를 반환합니다.                      |
