@@ -14,7 +14,12 @@
     <button type="button" onclick="isWrite()">글 작성</button>
     <a type="text" href="board/myPage" id = "myPage">마이페이지</a>
 </div>
-
+<div>
+    <form action = "board/search" method = "post">
+        <input placeholder="제목, 내용등을 검색하시오" name="keyword"><br>
+        <input type="submit" value="검색">
+    </form>
+</div>
 <div>
     <table>
         <tr>

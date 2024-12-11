@@ -28,5 +28,32 @@
     <td th:text = "${board.boardLike}"></td>
   </tr>
 </table>
+<script>
+  const state = [[${state}]];
+
+  const one = document.getElementById("write");
+  const two = document.getElementById("comment");
+  const three = document.getElementById("like");
+  if(state == 1){
+    one.style.display = "inline";
+    two.style.display = "none";
+    three.style.display = "none";
+  }
+  else if(state == 2){
+    one.style.display = "none";
+    two.style.display = "inline";
+    three.style.display = "none";
+  }
+  else if(state == 3){
+    one.style.display = "none";
+    two.style.display = "none";
+    three.style.display = "inline";
+  }
+  else{
+    one.style.display = "none";
+    two.style.display = "none";
+    three.style.display = "none";
+  }
+</script>
 </body>
 </html>

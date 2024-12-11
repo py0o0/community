@@ -66,4 +66,8 @@ public class BoardService {
     public List<Board> findByUserIdLike(String userId) {
         return boardRepository.findByUserIdLike(userId);
     }
+
+    public List<Board> search(String keyword) {
+        return boardRepository.search(keyword);
+    }
 }

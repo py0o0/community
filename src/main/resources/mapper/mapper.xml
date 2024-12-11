@@ -50,6 +50,11 @@
     <select id="findByUserId" parameterType="String" resultType="board">
         select * from board_table where boardWriter=#{userId} order by boardId desc
     </select>
+    <select id="searchBoard" parameterType="String" resultType="board">
+        select * from board_table
+        where boardTitle like concat('%', #{keyword},'%') or boardContents like concat('%', #{keyword},'%')
+        order by boardId
+    </select>
 
     <insert id = "likeTableUpdate">
         insert into like_table(userId, boardId)

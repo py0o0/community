@@ -95,6 +95,7 @@ public class BoardController {
         String userId = (String) session.getAttribute("userId");
         List<Board> board = boardService.findByUserId(userId);
         model.addAttribute("board", board);
+        model.addAttribute("state",1);
         return "myPageBoard";
     }
 
@@ -103,6 +104,7 @@ public class BoardController {
         String userId = (String) session.getAttribute("userId");
         List<Board> board = boardService.findByUserIdComment(userId);
         model.addAttribute("board", board);
+        model.addAttribute("state",2);
         return "myPageBoard";
     }
 
@@ -111,6 +113,15 @@ public class BoardController {
         String userId = (String) session.getAttribute("userId");
         List<Board> board = boardService.findByUserIdLike(userId);
         model.addAttribute("board", board);
+        model.addAttribute("state",3);
+        return "myPageBoard";
+    }
+
+    @PostMapping("board/search")
+    public String search(@RequestParam String keyword, Model model){
+        List<Board> board = boardService.search(keyword);
+        model.addAttribute("board", board);
+        model.addAttribute("state",0);
         return "myPageBoard";
     }
 }

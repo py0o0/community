@@ -79,4 +79,8 @@ public class BoardRepository {
     public List<Board> findByUserIdLike(String userId) {
         return sql.selectList("Com.findByUserIdLike", userId);
     }
+
+    public List<Board> search(String keyword) {
+        return sql.selectList("Com.searchBoard",keyword);
+    }
 }
