@@ -58,6 +58,7 @@ MCV 패턴, mybatis, crud 학습
   - 작성자의 경우 게시글 수정 및 삭제 가능
   - 조회수 기능 구현
   - 댓글 기능 구현
+  - 제목, 내용으로 게시글 검색 기능 구현
 
 - **좋아요**: 
   - 로그인 상태일 시 게시글에 좋아요 기능 가능
@@ -100,3 +101,4 @@ MCV 패턴, mybatis, crud 학습
 | **내가 쓴 게시글 조회**   | GET        | `/board/myWrite`              | 없음                                                                         | HTML 페이지       |
 | **내가 작성한 댓글 조회** | GET        | `/board/myComment`            | 없음                                                                         | HTML 페이지       |
 | **내가 좋아요한 게시글 조회** | GET        | `/board/myLike`               | 없음                                                                         | HTML 페이지       |
+| **게시글 검색 요청**           | POST       | `/board/search`                    | `keyword` (String, 필수): 검색 키워드                                         | HTML 페이지           |
