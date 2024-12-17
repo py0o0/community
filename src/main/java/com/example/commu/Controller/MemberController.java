@@ -68,6 +68,7 @@ public class MemberController {
     public String logout(HttpSession session){
         session.removeAttribute("login");
         session.removeAttribute("userId");
+        session.invalidate();
         return "redirect:/";
     }
 
